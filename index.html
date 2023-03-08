@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+
+    <style>
+      .body{
+        background: rgb(35,52,88);
+        background: linear-gradient(171deg, rgba(35,52,88,1) 47%, rgba(17,24,39,1) 91%);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .btnWatch{
+          background: linear-gradient(180deg, rgba(125,150,220,1) 0%, rgba(29,78,216,1) 100%);
+          transition: .5s;
+      }
+      .btnWatch:hover{
+        background: linear-gradient(150deg, rgba(125,150,220,1) 0%, rgba(29,78,216,1) 100%);
+          transition: .5s;
+      }
+      .btnWatch:hover .textBtnWatch{
+          color: white;
+          font-weight: 600;
+          transition: .5s;
+      }
+      .btnDownload:hover{
+          background-color: white;
+          transition: .3s;
+      }
+      .btnDownload:hover .textBtnDownload{
+          color: black;
+          font-weight: 600;
+          transition: .3s;
+      }
+    </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+  </head>
+  <body class="body">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
