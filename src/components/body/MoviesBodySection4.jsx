@@ -23,7 +23,7 @@ export default function MoviesBodySection4()
             // console.log(response.data.results[0]);
         });
 
-        axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`).then((response) => {
+        axios.get(`https://api.themoviedb.org/3/genre/tv/list?api_key=${apiKey}`).then((response) => {
             setGenres(response.data.genres);
             // console.log(response.data.genres);
         }).catch((error) => {

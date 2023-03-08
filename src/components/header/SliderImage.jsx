@@ -90,12 +90,16 @@ export default function SliderImage()
                                 </Box>
 
                                 <Flex gap={3} mt={5}>
-                                    <Button colorScheme={"yellow"} leftIcon={<ViewIcon/>}>Play Now</Button>
-                                    <Button color={"white"} variant={"outline"} leftIcon={<InfoIcon/>} className="hover:text-black">
-                                    <Link className="text-white hover:underline" to={`/details/movie/${data.id}`} display={"inline-block"} variant={"link"} colorScheme={"yellow"} fontSize={"md"} color={"white"} fontWeight={"medium"}>
-                            Details
-                            </Link>
-                                    </Button>
+                                    <Link to={`/details/movie/${data.id}#watch`}>
+                                        <Button colorScheme={"yellow"} leftIcon={<ViewIcon/>}>
+                                            Play Now
+                                        </Button>
+                                    </Link>
+                                    <Link to={`/details/movie/${data.id}`}>
+                                        <Button className="text-white hover:text-black" color={"white"} variant={"outline"} leftIcon={<InfoIcon/>}>
+                                            Details
+                                        </Button>
+                                    </Link>
                                 </Flex>
                             </Box>
 
