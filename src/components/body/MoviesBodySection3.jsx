@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import { Link } from "react-router-dom";
+import MoviesSectionSkeleton, { SkeletonDesktop, SkeletonTab } from "../skeleton/MoviesSectionSkeleton";
 
 export default function MoviesBodySection3()
 {
@@ -36,16 +37,7 @@ export default function MoviesBodySection3()
 
     return (
         (loading == true) 
-        ? <Card mx={{ base:5, md:"14", lg:"32" }} bg={"whiteAlpha.100"} mt={7} borderRadius={"15px"} overflow={"hidden"} border={"none"} outline={"none"} className="">
-            <CardHeader px={4} m={0} pt={4}>
-            <Skeleton startColor='whiteAlpha.200' endColor={"whiteAlpha.300"} w={"100%"} h={20} borderRadius={"15px"} />
-            </CardHeader>
-            <CardBody px={4} pb={4} pt={0} m={0}>
-            <Skeleton startColor='whiteAlpha.200' endColor={"whiteAlpha.300"} w={"80%"} h={5} borderRadius={"15px"} />
-            <Skeleton startColor='whiteAlpha.200' endColor={"whiteAlpha.300"} w={"60%"} h={5} borderRadius={"15px"} my={3} />
-            <Skeleton startColor='whiteAlpha.200' endColor={"whiteAlpha.300"} w={"40%"} h={5} borderRadius={"15px"} />
-            </CardBody>
-        </Card>
+        ? (window.innerWidth <= 768) ? <MoviesSectionSkeleton/> : (window.innerWidth >= 768 && window.innerWidth <= 1024) ? <SkeletonTab/> : (window.innerWidth >= 1024) ? <SkeletonDesktop/> : <MoviesSectionSkeleton/>
     :
         <Box pt={10} px={{ base:5, md:"14", lg:"32" }}>
             <Flex justifyContent={"space-between"} alignItems={"center"}>
