@@ -1,7 +1,7 @@
-import { HamburgerIcon } from "@chakra-ui/icons"
-import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Text, useDisclosure } from "@chakra-ui/react"
+import { HamburgerIcon, PhoneIcon, SearchIcon } from "@chakra-ui/icons"
+import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Input, InputGroup, InputLeftElement, Text, useDisclosure } from "@chakra-ui/react"
 import { useRef } from "react"
-import { Link } from "react-router-dom"
+import { Form, Link, Navigate, redirect } from "react-router-dom"
 
 function DrawerExample() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -42,10 +42,22 @@ function DrawerExample() {
 
   export default function Navbar()
   {
+    function redirectHandler()
+    {
+      // return redirect("/search");
+      return <Navigate to={"/search"}/>
+      // console.log('haloooooo');
+    }
+
     return (
         <Box>
             <Flex px={{ base:5, md:10, lg:20 }} py={{ base:3, md:5 }} justifyContent={"space-between"} alignItems="center">
                 <Text fontSize={"lg"} color={"white"} fontWeight={"bold"}>Movies.io</Text>
+                <Button px={5} variant={"solid"} colorScheme={"facebook"} leftIcon={<SearchIcon/>}>
+                  <Link to={"/search"}>
+                    Search
+                  </Link>
+                </Button>
                 <DrawerExample/>
             </Flex>
         </Box>

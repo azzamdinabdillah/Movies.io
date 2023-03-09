@@ -20,6 +20,7 @@ export default function DetailsMovie()
     let [videos, setVideos] = useState([]);
     let [singleVideo, setSingleVideo] = useState([]);
     let [playSingleVideo, setPlaySingleVideo] = useState(false)
+    let [loadingBtn, setLoadingBtn] = useState(false);
     
     useEffect(() => {
         axios.get(`https://api.themoviedb.org/3/${platform}/${movieId}?api_key=${apiKey}`).then((response) => {
@@ -42,6 +43,11 @@ export default function DetailsMovie()
     function playTrailer()
     {
         (playSingleVideo) ? setPlaySingleVideo(false) : setPlaySingleVideo(true);
+        (loadingBtn) ? setLoadingBtn(false) : setLoadingBtn(true);
+
+        setTimeout(() => {
+            setLoadingBtn(false);
+        }, 3000);
     }
 
     return (
@@ -58,7 +64,7 @@ export default function DetailsMovie()
             </Box>
             <Box overflow={"hidden"}>
                 {(playSingleVideo) 
-                ? (loading === true) ? <SkeletonVideos/> : <iframe className="md:rounded-lg md:border" width={(window.innerWidth <= 768) ? `${windowWidth}` : (window.innerWidth >= 768 && window.innerWidth <= 1024) ? `${windowWidth * .45}` : (window.innerWidth >= 1024) ? `${windowWidth * .33}` : `${windowWidth * .95}` } height={(window.innerWidth <= 768) ? '210' : (window.innerWidth >= 768 && window.innerWidth <= 1024) ? '250' : (window.innerWidth >= 1024) ? '300' : '210' } src={`https://www.youtube.com/embed/${singleVideo.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                ? (loading === true) ? <SkeletonVideos/> : <iframe className="md:rounded-lg md:border" width={(window.innerWidth <= 768) ? `${windowWidth}` : (window.innerWidth >= 768 && window.innerWidth <= 1024) ? `${windowWidth * .45}` : (window.innerWidth >= 1024) ? `${windowWidth * .33}` : `${windowWidth * .95}` } height={(window.innerWidth <= 768) ? '210' : (window.innerWidth >= 768 && window.innerWidth <= 1024) ? '250' : (window.innerWidth >= 1024) ? '300' : '210' } src={`https://www.youtube.com/embed/${singleVideo.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoPlay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                 : 
                 <Image borderRadius={{ base:0, md:10 }} filter={"auto"} brightness={"80%"} objectFit={"cover"} objectPosition={"bottom"} w={"full"} src={`https://image.tmdb.org/t/p/w500/${detailMovie.backdrop_path}`} style={{ 
                     boxShadow: '3px -200px 61px -126px rgba(0,0,0,0.44) inset'
@@ -67,12 +73,20 @@ export default function DetailsMovie()
                 }
             </Box>
             <Box margin={5}>
-                <Button className="btnTrailer" onClick={playTrailer} bg={"whiteAlpha.100"} w={"full"} py={7} borderRadius={'full'}>
-                    <Flex gap={4}>
-                        <Image src={'/image/trailer.png'}/>
-                        <Text className="textBtnTrailer" fontSize={"lg"} color={"blue.300"}>{(playSingleVideo === false) ? 'Trailer' : "Image"}</Text>
-                    </Flex>
-                </Button>
+            {(loadingBtn === false) 
+            ? <Button className="btnTrailer" onClick={playTrailer} bg={"whiteAlpha.100"} w={"full"} py={7} borderRadius={'full'}>
+            <Flex gap={4} alignItems={"center"}>
+                <Image src={'/image/trailer.png'}/>
+                <Button variant={"unstyled"} className="textBtnTrailer" fontSize={"lg"} color={"blue.300"}>{(playSingleVideo === false) ? 'Trailer' : "Image"}</Button>
+            </Flex>
+        </Button> 
+            : <Button isLoading className="btnTrailer" onClick={playTrailer} bg={"whiteAlpha.100"} w={"full"} py={7} borderRadius={'full'}>
+            <Flex gap={4} alignItems={"center"}>
+                <Image src={'/image/trailer.png'}/>
+                <Button variant={"unstyled"} className="textBtnTrailer" fontSize={"lg"} color={"blue.300"}>{(playSingleVideo === false) ? 'Trailer' : "Image"}</Button>
+            </Flex>
+        </Button>
+            }
             </Box>
             <Box mt={7}>
                 <Flex justifyContent={"space-around"} alignItems={"center"} px={3}>
@@ -162,7 +176,7 @@ export default function DetailsMovie()
                     <Text color={"white"} fontWeight={"medium"} fontSize={"xl"} mb={5}>Video Clip</Text>
                     <div className="md:flex flex-wrap lg:grid grid-cols-3 gap-x-10 gap-y-5">
                         {(loading === true) ? <SkeletonVideosYoutube/> : videos.map((dataVideo) => (
-                            <iframe className="w-full mx-auto rounded-lg border-2 mb-3" height={(window.innerWidth <= 768) ? '210' : (window.innerWidth >= 768 && window.innerWidth <= 1024) ? '250' : (window.innerWidth >= 1024) ? '300' : '210' } src={`https://www.youtube.com/embed/${dataVideo.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe className="w-full mx-auto rounded-lg border-2 mb-3" height={(window.innerWidth <= 768) ? '210' : (window.innerWidth >= 768 && window.innerWidth <= 1024) ? '250' : (window.innerWidth >= 1024) ? '300' : '210' } src={`https://www.youtube.com/embed/${dataVideo.key}`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                         ))}
                     </div>
                 </Box>
